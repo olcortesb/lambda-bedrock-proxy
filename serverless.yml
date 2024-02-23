@@ -6,14 +6,24 @@ provider:
   runtime: python3.11
   stage: dev
   region: us-east-1
-	
   iam:
     role:
       statements:
-        # Allow functions to list all buckets
         - Effect: Allow
           Action: 'bedrock:*'
           Resource: '*'
+  apiGateway:
+    apiKeys:
+      - name: tollmkey
+        description: tollmkey api key# Optional
+    usagePlan:
+      quota:
+        limit: 5
+        offset: 2
+        period: MONTH
+      throttle:
+        burstLimit: 200
+        rateLimit: 100
 
 layers:
   bedrock:
@@ -36,8 +46,9 @@ functions:
     handler: src/handler.hello
     timeout: 30
     events:
-      - httpApi:
-          path: /
+      - http:
+          path: titan
           method: get
+          private: true
     layers:
       - !Ref BedrockLambdaLayer

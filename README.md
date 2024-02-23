@@ -48,3 +48,28 @@ serverless invoke --function hello --aws-profile name-you-profile
 ```
 serverless remove --stage dev --aws-profile
 ```
+
+## API Security
+
+In the deploy process the serverless framewokr show the ApiKey value in the console.
+
+```bash
+Deploying lambda-bedrock-proxy to stage dev (us-east-1)
+
+✔ Service deployed to stack lambda-bedrock-proxy-dev (80s)
+# Value of APIKEY
+api keys:
+  tollmkey: YOURAPIKEYHERE - tollmkey api key# Optional
+endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/titan
+functions:
+  hello: lambda-bedrock-proxy-dev-hello (3.1 kB)
+layers:
+  bedrock: arn:aws:lambda:us-east-1:XXXXXXXXX:layer:bedrock-dependencies:4
+```
+
+How invoke the endpoint securized with API key
+
+```bash
+curl --location 'https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/titan' \
+--header 'x-api-key: YOURAPIKEYHERE'
+```
