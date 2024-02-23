@@ -1,0 +1,43 @@
+service: lambda-bedrock-proxy
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11
+  stage: dev
+  region: us-east-1
+	
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: 'bedrock:*'
+          Resource: '*'
+
+layers:
+  bedrock:
+    name: bedrock-dependencies
+    path: layers/tools
+    compatibleRuntimes:
+      - python3.11
+    description: "Dependencies bedrock"
+
+package:
+  include:
+    - src/handler.py
+    - src/client_bedrock.py
+  exclude:
+    - node_modules/**
+    - venv/**
+
+functions:
+  hello:
+    handler: src/handler.hello
+    timeout: 30
+    events:
+      - httpApi:
+          path: /
+          method: get
+    layers:
+      - !Ref BedrockLambdaLayer

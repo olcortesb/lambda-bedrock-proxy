@@ -1,0 +1,6 @@
+name: lambda-bedrock-proxy
+org: olcortesb
+description: AWS bedrock proxy with aws lambda
+keywords: aws, serverless, bedrock, lambda, python
+repo: https://github.com/olcortesb/lambda-bedrock-proxy
+license: MIT
