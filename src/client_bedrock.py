@@ -5,8 +5,6 @@ import json
 bedrock_runtime = boto3.client('bedrock-runtime', region_name='us-east-1')
 
 def titan_model(prompt):
-    prompt_data = """
-    Command: write a mail of apology to a client"""
     
     body = json.dumps({
         "inputText": prompt, 
@@ -36,12 +34,10 @@ def titan_model(prompt):
 
     return response
 
-def llama_model():
-    prompt_data = """
-    Command: write a mail of apology to a client"""
+def llama_model(prompt):
 
     body = json.dumps({ 
-    	'prompt': prompt_data,
+    	'prompt': prompt,
         'max_gen_len': 512,
     	'top_p': 0.9,
     	'temperature': 0.2
@@ -56,4 +52,7 @@ def llama_model():
     response_body = json.loads(response.get('body').read().decode('utf-8'))
 
     outputText = response_body['generation'].strip()
-    return outputText
+
+    response = {"statusCode": 200, "body": json.dumps(outputText)}
+
+    return response
