@@ -1,5 +1,7 @@
 # lambda-bedrock-proxy
-Handler AWS bedrock to diferente LLM
+Handler AWS bedrock to diferente LLM with Api key and cuota
+
+![alt text](docs/lambda-proxy-bedrock-1.png "Title")
 
 ## Prerequisites
 
@@ -25,6 +27,16 @@ AWS cli
 aws --version
 #aws-cli/1.32.48 Python/3.10.12 Linux/6.5.0-17-generic botocore/1.34.48
 ```
+
+Python dependencies:
+
+```bash
+boto3>=1.28.57
+awscli>=1.29.57
+botocore>=1.31.57
+langchain>=0.0.350
+```
+
 
 ## Usage
 
