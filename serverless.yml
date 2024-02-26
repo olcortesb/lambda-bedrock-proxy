@@ -18,7 +18,7 @@ provider:
         description: tollmkey api key# Optional
     usagePlan:
       quota:
-        limit: 100
+        limit: 5
         offset: 2
         period: MONTH
       throttle:
@@ -47,7 +47,7 @@ functions:
     timeout: 30
     events:
       - http:
-          path: titan
+          path: bedrock
           method: post
           private: true
     layers:
